@@ -11,6 +11,7 @@ TagManager:
   - Checkpoint
   - NextLevel
   - PreviousLevel
+  - Crystal
   layers:
   - Default
   - TransparentFX

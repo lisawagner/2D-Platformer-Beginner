@@ -5,9 +5,9 @@ using UnityEngine;
 public class CameraController2 : MonoBehaviour
 {
     public GameObject player;
-    [SerializeField] private float offset;
-    [SerializeField] private float offsetSmoothing;
-    private Vector3 playerPosition;
+    //[SerializeField] private float offset;
+    //[SerializeField] private float offsetSmoothing;
+   // private Vector3 playerPosition;
 
     void Start()
     {
@@ -17,9 +17,10 @@ public class CameraController2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerPosition = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
+        transform.position = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
+        //playerPosition = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
 
-        if(player.transform.localScale.x > 0f)
+        /*if(player.transform.localScale.x > 0f)
         {
             playerPosition = new Vector3(playerPosition.x + offset, playerPosition.y, playerPosition.z);
         }
@@ -27,6 +28,6 @@ public class CameraController2 : MonoBehaviour
         {
             playerPosition = new Vector3(playerPosition.x - offset, playerPosition.y, playerPosition.z);
         }
-        transform.position = Vector3.Lerp(transform.position, playerPosition, offsetSmoothing * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, playerPosition, offsetSmoothing * Time.deltaTime);*/
     }
 }

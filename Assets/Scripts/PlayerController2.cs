@@ -22,6 +22,8 @@ public class PlayerController2 : MonoBehaviour
     [SerializeField] private Vector3 respawnPoint;
     public GameObject fallDetector;
 
+    
+
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
@@ -88,6 +90,12 @@ public class PlayerController2 : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             respawnPoint = transform.position; // reset spawn position
+        }
+        else if(collision.tag == "Crystal")
+        {
+            ScoreController.totalScore += 1;
+            Debug.Log(ScoreController.totalScore); ////// ?ABSTRACTION OF SCORE? ////
+            collision.gameObject.SetActive(false); // disable object
         }
     }
 
