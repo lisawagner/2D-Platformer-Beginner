@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class PlayerController2 : MonoBehaviour
@@ -22,7 +23,7 @@ public class PlayerController2 : MonoBehaviour
     [SerializeField] private Vector3 respawnPoint;
     public GameObject fallDetector;
 
-    
+    public Text scoreText;
 
     void Start()
     {
@@ -30,6 +31,8 @@ public class PlayerController2 : MonoBehaviour
         playerAnimation = GetComponent<Animator>();
         footsteps = GetComponent<AudioSource>();
         respawnPoint = transform.position; // stores players initial position to respawn to
+        scoreText.text = "SCORE: " + ScoreController.totalScore;
+
     }
 
     // Update is called once per frame
@@ -94,6 +97,7 @@ public class PlayerController2 : MonoBehaviour
         else if(collision.tag == "Crystal")
         {
             ScoreController.totalScore += 1;
+            scoreText.text = "SCORE: " + ScoreController.totalScore;
             Debug.Log(ScoreController.totalScore); ////// ?ABSTRACTION OF SCORE? ////
             collision.gameObject.SetActive(false); // disable object
         }
