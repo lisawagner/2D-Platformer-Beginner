@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerController2 : MonoBehaviour
 {
@@ -76,6 +78,16 @@ public class PlayerController2 : MonoBehaviour
         else if(collision.tag == "Checkpoint")
         {
             respawnPoint = transform.position; // set to the new player position at checkpoint
+        }
+        else if(collision.tag == "NextLevel")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            respawnPoint = transform.position; // reset spawn position
+        }
+        else if (collision.tag == "PreviousLevel")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            respawnPoint = transform.position; // reset spawn position
         }
     }
 
