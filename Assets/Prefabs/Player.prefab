@@ -149,7 +149,7 @@ Animator:
   m_GameObject: {fileID: 8266774763085395613}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9625e54ffa22e4e48a6af3790d434030, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5c01276ed6852e8458b77da0bea674c6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -273,6 +273,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  respawnPoint: {x: 0, y: 0, z: 0}
+  fallDetector: {fileID: 0}
 --- !u!70 &1473548619554241620
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
