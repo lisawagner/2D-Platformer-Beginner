@@ -73,6 +73,10 @@ public class PlayerController2 : MonoBehaviour
         {
             transform.position = respawnPoint;
         }
+        else if(collision.tag == "Checkpoint")
+        {
+            respawnPoint = transform.position; // set to the new player position at checkpoint
+        }
     }
 
     private void FootSounds()
