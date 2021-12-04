@@ -12,6 +12,7 @@ TagManager:
   - NextLevel
   - PreviousLevel
   - Crystal
+  - Spikes
   layers:
   - Default
   - TransparentFX
