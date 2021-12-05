@@ -276,6 +276,7 @@ MonoBehaviour:
   respawnPoint: {x: 0, y: 0, z: 0}
   fallDetector: {fileID: 0}
   scoreText: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!70 &1473548619554241620
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

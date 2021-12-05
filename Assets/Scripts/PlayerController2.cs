@@ -24,6 +24,7 @@ public class PlayerController2 : MonoBehaviour
     public GameObject fallDetector;
 
     public Text scoreText;
+    public HealthBar healthBar; // access the public health script
 
     void Start()
     {
@@ -100,6 +101,14 @@ public class PlayerController2 : MonoBehaviour
             scoreText.text = "SCORE: " + ScoreController.totalScore;
             Debug.Log(ScoreController.totalScore); ////// ?ABSTRACTION OF SCORE? ////
             collision.gameObject.SetActive(false); // disable object
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.tag == "Spikes")
+        {
+            healthBar.Damage(0.002f);
         }
     }
 
