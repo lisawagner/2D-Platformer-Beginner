@@ -114,6 +114,6 @@ public class PlayerController2 : MonoBehaviour
 
     private void FootSounds()
     {
-        //footsteps.Play();
+        footsteps.Play();
     }
 }
