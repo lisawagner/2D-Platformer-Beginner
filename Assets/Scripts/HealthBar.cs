@@ -21,6 +21,8 @@ public class HealthBar : MonoBehaviour
 
     }
 
+    ///// ABSTRACTION - Health and damage functionality available
+    /////               to other levels and objects
     public void Damage(float damage)
     {
         if((Health.totalHealth -= damage) >= 0f)
