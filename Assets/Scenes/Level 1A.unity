@@ -6347,8 +6347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efbf3fcfdee69bc4badd26a90f428622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftCap: 6.61
-  rightCap: 20.5
+  leftCap: 13
+  rightCap: 20
   jumpLength: 2
   jumpHeight: 2
   Ground:
@@ -8177,6 +8177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpSpeed: 18
+  hurtForce: 20
   groundCheck: {fileID: 2010919456}
   groundCheckRadius: 1
   groundLayer:
@@ -8568,7 +8569,7 @@ GameObject:
   - component: {fileID: 1878480085}
   - component: {fileID: 1878480084}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Grid - Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

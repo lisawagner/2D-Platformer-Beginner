@@ -37,23 +37,15 @@ public class EnemyController : MonoBehaviour
                     transform.localScale = new Vector3(1, 1, 1);
                 }
 
-
                 if(coll.IsTouchingLayers(Ground))
                 {
                     rb.velocity = new Vector2(-jumpLength, jumpHeight);
-                }
-
-                
+                }              
             }
             else
             {
                 isFacingLeft = false;
             }
-
-
-
-
-
 
 
         }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 
 public class HealthBar : MonoBehaviour
@@ -32,6 +34,7 @@ public class HealthBar : MonoBehaviour
         else
         {
             Health.totalHealth = 0f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         if(Health.totalHealth < 0.3f)

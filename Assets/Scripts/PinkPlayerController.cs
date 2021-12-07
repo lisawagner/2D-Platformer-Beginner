@@ -9,8 +9,10 @@ public class PinkPlayerController : MonoBehaviour
 {
     private enum State { IDLE, RUN, JUMP, FALL, HURT };
     private State state = State.IDLE;
+
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpSpeed = 18f;
+    [SerializeField] private float hurtForce = 0.02f; //rebound/kickback from bumping enemy
     private float direction = 0f;
 
     [SerializeField] private Transform groundCheck;
@@ -20,7 +22,8 @@ public class PinkPlayerController : MonoBehaviour
 
     private Rigidbody2D player;
     private Animator playerAnimation;
-    private CapsuleCollider2D playerHitBox;
+    private CapsuleCollider2D playerHitBox; // for better re-use on different players, use Collider2D instead
+    // CapsuleCollider2D is a child of Collider2D, as is BoxCollider2D, etc. // Inheritance?
     //private AudioSource footsteps;
 
     [SerializeField] private Vector3 respawnPoint;
@@ -33,7 +36,8 @@ public class PinkPlayerController : MonoBehaviour
     {
         player = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponent<Animator>();
-        playerHitBox = GetComponent<CapsuleCollider2D>(); //could just use generic Collider2D 
+        playerHitBox = GetComponent<CapsuleCollider2D>(); //could just use generic Collider2D
+                                                          //playerHitBox unused atm; using alternate ground check method
         //footsteps = GetComponent<AudioSource>();
         respawnPoint = transform.position; // stores players initial position to respawn to
         scoreText.text = "SCORE: " + ScoreController.totalScore;
@@ -47,11 +51,14 @@ public class PinkPlayerController : MonoBehaviour
 
         if (state != State.HURT)
         {
-            PlayerMovement();
+            MovementHandler(); // Abstraction Principle
         }
+        // --- ///
+        AnimationStateHandler(); // Abstraction Principle
+        playerAnimation.SetInteger("State", (int)state);//updates animation based on Enumerator state
     }
 
-    private void PlayerMovement()
+    private void MovementHandler()
     {
         
         direction = Input.GetAxis("Horizontal");
@@ -75,9 +82,9 @@ public class PinkPlayerController : MonoBehaviour
 
         //for jump movement
         if (Input.GetButtonDown("Jump") && isTouchingGround)
+        // could use (Input.GetButtonDown("Jump") && playerHitBox.isTouchingGround(groundLayer))
         {
-            player.velocity = new Vector2(player.velocity.x, jumpSpeed);
-            state = State.JUMP;
+            JumpHandler();
         }
 
         // to change speed parameter in animator
@@ -86,12 +93,16 @@ public class PinkPlayerController : MonoBehaviour
 
         // fall detection - follow the player on the x axis
         fallDetector.transform.position = new Vector2(transform.position.x, fallDetector.transform.transform.position.y);
-        // --- ///
-        AnimationState();
-        playerAnimation.SetInteger("State", (int)state);
+
     }
 
-    private void AnimationState()
+    private void JumpHandler()
+    {
+        player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+        state = State.JUMP;
+    }
+
+    private void AnimationStateHandler()
     {
         if (state == State.JUMP)
         {
@@ -103,6 +114,14 @@ public class PinkPlayerController : MonoBehaviour
         else if (state == State.FALL)
         {
             if (isTouchingGround)
+            {
+                state = State.IDLE;
+            }
+        }
+        else if (state == State.HURT)
+        {
+            // if we're hurt and no longer moving, reset to IDLE so that we can move again
+            if (Mathf.Abs(player.velocity.x) < 0.1f)
             {
                 state = State.IDLE;
             }
@@ -143,9 +162,10 @@ public class PinkPlayerController : MonoBehaviour
         }
         else if (collision.tag == "Crystal")
         {
+            ////// ABSTRACTION OF SCORE: ScoreController ////
             ScoreController.totalScore += 1;
-            scoreText.text = "SCORE: " + ScoreController.totalScore;
-            Debug.Log(ScoreController.totalScore); ////// ?ABSTRACTION OF SCORE? ////
+            scoreText.text = "SCORE: " + ScoreController.totalScore; 
+            Debug.Log(ScoreController.totalScore); 
             collision.gameObject.SetActive(false); // disable object
         }
     }
@@ -156,6 +176,41 @@ public class PinkPlayerController : MonoBehaviour
         {
             healthBar.Damage(0.002f);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            if (state == State.FALL)
+            {
+                Destroy(other.gameObject);
+                JumpHandler();
+            }
+            else
+            {
+                state = State.HURT;
+                HandleHealth();
+                if (other.gameObject.transform.position.x > transform.position.x)
+                {
+                    //enemy is to the right
+                    player.velocity = new Vector2(-hurtForce, player.velocity.y);
+                }
+                else
+                {
+                    //enemy is to the left
+                    player.velocity = new Vector2(hurtForce, player.velocity.y);
+                }
+            }
+        }
+
+    }
+
+    private void HandleHealth()
+    {
+        healthBar.Damage(0.002f);
+
+
     }
 
     //private void FootSounds()
