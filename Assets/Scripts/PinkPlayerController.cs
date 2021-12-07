@@ -56,6 +56,10 @@ public class PinkPlayerController : MonoBehaviour
         // --- ///
         AnimationStateHandler(); // Abstraction Principle
         playerAnimation.SetInteger("State", (int)state);//updates animation based on Enumerator state
+
+
+        // fall detection - follow the player on the x axis
+        fallDetector.transform.position = new Vector2(transform.position.x, fallDetector.transform.transform.position.y);
     }
 
     private void MovementHandler()
@@ -91,8 +95,6 @@ public class PinkPlayerController : MonoBehaviour
         playerAnimation.SetFloat("Speed", Mathf.Abs(player.velocity.x));
         playerAnimation.SetBool("OnGround", isTouchingGround);          
 
-        // fall detection - follow the player on the x axis
-        fallDetector.transform.position = new Vector2(transform.position.x, fallDetector.transform.transform.position.y);
 
     }
 
