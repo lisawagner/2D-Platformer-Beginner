@@ -57,7 +57,7 @@ public class PinkPlayerController : MonoBehaviour
         AnimationStateHandler(); // Abstraction Principle
         playerAnimation.SetInteger("State", (int)state);//updates animation based on Enumerator state
 
-
+        //TODO: Fix so that anims reset after fall caused by hurt knockback
         // fall detection - follow the player on the x axis
         fallDetector.transform.position = new Vector2(transform.position.x, fallDetector.transform.transform.position.y);
     }
@@ -95,7 +95,6 @@ public class PinkPlayerController : MonoBehaviour
         playerAnimation.SetFloat("Speed", Mathf.Abs(player.velocity.x));
         playerAnimation.SetBool("OnGround", isTouchingGround);          
 
-
     }
 
     private void JumpHandler()
@@ -105,6 +104,7 @@ public class PinkPlayerController : MonoBehaviour
     }
 
     private void AnimationStateHandler()
+        // TODO: State.FALL doesn't detect the player falling off of a floating platform, only "falls" after jump. Add from platforms
     {
         if (state == State.JUMP)
         {
@@ -127,6 +127,10 @@ public class PinkPlayerController : MonoBehaviour
             {
                 state = State.IDLE;
             }
+            //else if (!isTouchingGround)
+            //{
+            //    state = State.FALL;
+            //}
         }
         //else if (Mathf.Abs(player.velocity.x) > 2f) // 2f gives player a small slide in movements
         else if (Mathf.Abs(player.velocity.x) > Mathf.Epsilon) // epsilon prevents the slide
@@ -147,6 +151,7 @@ public class PinkPlayerController : MonoBehaviour
         if (collision.tag == "FallDetector")
         {
             transform.position = respawnPoint;
+            state = State.IDLE;
         }
         else if (collision.tag == "Checkpoint")
         {
@@ -172,25 +177,23 @@ public class PinkPlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Spikes")
-        {
-            healthBar.Damage(0.002f);
-        }
-    }
+
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
+            EnemyController monster = other.gameObject.GetComponent<EnemyController>();
+            
             if (state == State.FALL)
             {
-                Destroy(other.gameObject);
+                monster.HeadSmashedIn();
+                //Destroy(other.gameObject);
                 JumpHandler();
             }
             else
             {
+                //TODO: consider coroutine to time the knockback animation
                 state = State.HURT;
                 HandleHealth();
                 if (other.gameObject.transform.position.x > transform.position.x)
@@ -208,9 +211,18 @@ public class PinkPlayerController : MonoBehaviour
 
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        //TODO: Fix - It doesn't run continuously while player stays on spikes
+        if (collision.tag == "Spikes")
+        {
+            healthBar.Damage(0.002f);
+        }
+    }
+
     private void HandleHealth()
     {
-        healthBar.Damage(0.002f);
+        healthBar.Damage(0.1f);
 
 
     }

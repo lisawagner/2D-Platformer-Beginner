@@ -13,41 +13,46 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float jumpHeight = 2;
     [SerializeField] private LayerMask Ground;
 
-    private Collider2D coll;
-    private Rigidbody2D rb;
+    private Animator enemyAnimator;
+    private Collider2D enemyHitBox;
+    private Rigidbody2D enemy;
 
     private bool isFacingLeft = true;
 
-
+    //TODO: Redo enemyAI to idle/walk/run depending on detecting player nearby
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<Collider2D>();
+        enemy = GetComponent<Rigidbody2D>();
+        enemyHitBox = GetComponent<Collider2D>();
+        enemyAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isFacingLeft)
+        EnemyMovementHandler();
+    }
+
+    private void EnemyMovementHandler()
+    {
+        if (isFacingLeft)
         {
-            if(transform.position.x > leftCap)
+            if (transform.position.x > leftCap)
             {
-                if(transform.localScale.x != 1)
+                if (transform.localScale.x != 1)
                 {
                     transform.localScale = new Vector3(1, 1, 1);
                 }
 
-                if(coll.IsTouchingLayers(Ground))
+                if (enemyHitBox.IsTouchingLayers(Ground))
                 {
-                    rb.velocity = new Vector2(-jumpLength, jumpHeight);
-                }              
+                    enemy.velocity = new Vector2(-jumpLength, jumpHeight);
+                }
             }
             else
             {
                 isFacingLeft = false;
             }
-
-
         }
         else
         {
@@ -58,18 +63,27 @@ public class EnemyController : MonoBehaviour
                     transform.localScale = new Vector3(-1, 1, 1);
                 }
 
-
-                if (coll.IsTouchingLayers(Ground))
+                if (enemyHitBox.IsTouchingLayers(Ground))
                 {
-                    rb.velocity = new Vector2(jumpLength, jumpHeight);
+                    enemy.velocity = new Vector2(jumpLength, jumpHeight);
                 }
-
-
             }
             else
             {
                 isFacingLeft = true;
             }
         }
+    }
+
+    public void HeadSmashedIn()
+    {
+        
+        enemyAnimator.SetTrigger("Death");
+        
+    }
+
+    private void Death()
+    {
+        Destroy(this.gameObject);
     }
 }
