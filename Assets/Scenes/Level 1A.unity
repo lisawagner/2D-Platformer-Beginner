@@ -5182,13 +5182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efbf3fcfdee69bc4badd26a90f428622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftCap: 6.61
-  rightCap: 20.5
-  jumpLength: 2
-  jumpHeight: 2
-  Ground:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!50 &1073402689
 Rigidbody2D:
   serializedVersion: 4
@@ -6247,8 +6240,8 @@ GameObject:
   - component: {fileID: 1541541329}
   - component: {fileID: 1541541328}
   - component: {fileID: 1541541327}
-  - component: {fileID: 1541541331}
   - component: {fileID: 1541541332}
+  - component: {fileID: 1541541331}
   m_Layer: 0
   m_Name: AngryPig
   m_TagString: Enemy
@@ -6362,7 +6355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541541326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.895141, y: -6.602475, z: 1.0643322}
+  m_LocalPosition: {x: 12.895141, y: -6.71, z: 1.0643322}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 137626716}
@@ -6377,13 +6370,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1541541326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efbf3fcfdee69bc4badd26a90f428622, type: 3}
+  m_Script: {fileID: 11500000, guid: c70524f2b646a764583a7fd8ba07fef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   leftCap: 13
   rightCap: 20
-  jumpLength: 2
-  jumpHeight: 2
+  jumpLength: 1
+  jumpHeight: 3
   Ground:
     serializedVersion: 2
     m_Bits: 64
