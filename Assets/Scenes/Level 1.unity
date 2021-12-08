@@ -1008,7 +1008,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdd375bfb07a8044395ec9974b1138e7, type: 3}
   m_Name: 
@@ -2142,13 +2142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efbf3fcfdee69bc4badd26a90f428622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftCap: 6.61
-  rightCap: 20.5
-  jumpLength: 2
-  jumpHeight: 2
-  Ground:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!50 &1073402689
 Rigidbody2D:
   serializedVersion: 4
@@ -2879,13 +2872,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efbf3fcfdee69bc4badd26a90f428622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftCap: 6.61
-  rightCap: 20.5
-  jumpLength: 2
-  jumpHeight: 2
-  Ground:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &1556401806
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,6 @@ public class AngryPig : EnemyController
     [SerializeField] private LayerMask Ground;
 
     private Collider2D enemyHitBox;
-    private Rigidbody2D enemy;
 
     private bool isFacingLeft = true;
 
@@ -24,7 +23,6 @@ public class AngryPig : EnemyController
     protected override void Start() /// child override
     {
         base.Start(); /// ACCESS parent start method
-        enemy = GetComponent<Rigidbody2D>();
         enemyHitBox = GetComponent<Collider2D>();
     }
 
