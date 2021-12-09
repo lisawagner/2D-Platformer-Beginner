@@ -157,21 +157,21 @@ public class PinkPlayerController : MonoBehaviour
             transform.position = respawnPoint;
             state = State.IDLE;
         }
-        else if (collision.tag == "Checkpoint")
+        if (collision.tag == "Checkpoint")
         {
             respawnPoint = transform.position; // set to the new player position at checkpoint
         }
-        else if (collision.tag == "NextLevel")
+        if (collision.tag == "NextLevel")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             respawnPoint = transform.position; // reset spawn position
         }
-        else if (collision.tag == "PreviousLevel")
+        if (collision.tag == "PreviousLevel")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             respawnPoint = transform.position; // reset spawn position
         }
-        else if (collision.tag == "Crystal")
+        if (collision.tag == "Crystal")
         {
             ////// ABSTRACTION OF SCORE: ScoreController integer carried between scenes ////
             ScoreController.totalScore += 1;
@@ -179,6 +179,13 @@ public class PinkPlayerController : MonoBehaviour
             scoreText.text = "SCORE: " + ScoreController.totalScore;
             Debug.Log(ScoreController.totalScore); 
             collision.gameObject.SetActive(false); // disable object
+        }
+        if (collision.tag == "Powerup")
+        {
+            Destroy(collision.gameObject);
+            speed = speed + 10f;
+            GetComponent<SpriteRenderer>().color = Color.green;
+            StartCoroutine(PowerReset());
         }
     }
 
@@ -226,11 +233,17 @@ public class PinkPlayerController : MonoBehaviour
     {
         healthBar.Damage(0.1f);
 
-
     }
 
     private void FootSounds()
     {
         footsteps.Play();
+    }
+
+    private IEnumerator PowerReset()
+    {
+        yield return new WaitForSeconds(10);
+        speed = speed - 5f;
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 }
