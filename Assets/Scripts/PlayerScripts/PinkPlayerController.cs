@@ -173,10 +173,10 @@ public class PinkPlayerController : MonoBehaviour
         }
         else if (collision.tag == "Crystal")
         {
-            ////// ABSTRACTION OF SCORE: ScoreController ////
+            ////// ABSTRACTION OF SCORE: ScoreController integer carried between scenes ////
             ScoreController.totalScore += 1;
             crystalSound.Play();
-            scoreText.text = "SCORE: " + ScoreController.totalScore; 
+            scoreText.text = "SCORE: " + ScoreController.totalScore;
             Debug.Log(ScoreController.totalScore); 
             collision.gameObject.SetActive(false); // disable object
         }
@@ -191,7 +191,6 @@ public class PinkPlayerController : MonoBehaviour
             if (state == State.FALL)
             {
                 monster.HeadSmashedIn();
-                //Destroy(other.gameObject);
                 JumpHandler();
             }
             else
