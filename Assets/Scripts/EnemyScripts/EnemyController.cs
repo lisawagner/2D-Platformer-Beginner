@@ -24,7 +24,10 @@ public class EnemyController : MonoBehaviour
     {       
         enemyAnimator.SetTrigger("Death");
         deathSound.PlayOneShot(impact, 0.7f);
+        // prevent dead enemy from moving and colliding
         enemy.velocity = Vector2.zero;
+        enemy.bodyType = RigidbodyType2D.Kinematic;
+        GetComponent<Collider2D>().enabled = false;
     }
 
     private void Death()
