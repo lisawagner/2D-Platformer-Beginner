@@ -23,8 +23,10 @@ public class PinkPlayerController : MonoBehaviour
     private Rigidbody2D player;
     private Animator playerAnimation;
     private CapsuleCollider2D playerHitBox; // for better re-use on different players, use Collider2D instead
-    // CapsuleCollider2D is a child of Collider2D, as is BoxCollider2D, etc. // Inheritance?
-    //private AudioSource footsteps;
+                                            // CapsuleCollider2D is a child of Collider2D, as is BoxCollider2D, etc. // Inheritance?
+
+    [SerializeField] private AudioSource footsteps;
+    [SerializeField] private AudioSource crystalSound;
 
     [SerializeField] private Vector3 respawnPoint;
     public GameObject fallDetector;
@@ -39,6 +41,8 @@ public class PinkPlayerController : MonoBehaviour
         playerHitBox = GetComponent<CapsuleCollider2D>(); //could just use generic Collider2D
                                                           //playerHitBox unused atm; using alternate ground check method
         //footsteps = GetComponent<AudioSource>();
+        //crystalSound = GetComponent<AudioSource>();
+
         respawnPoint = transform.position; // stores players initial position to respawn to
         scoreText.text = "SCORE: " + ScoreController.totalScore;
 
@@ -171,6 +175,7 @@ public class PinkPlayerController : MonoBehaviour
         {
             ////// ABSTRACTION OF SCORE: ScoreController ////
             ScoreController.totalScore += 1;
+            crystalSound.Play();
             scoreText.text = "SCORE: " + ScoreController.totalScore; 
             Debug.Log(ScoreController.totalScore); 
             collision.gameObject.SetActive(false); // disable object
@@ -225,8 +230,8 @@ public class PinkPlayerController : MonoBehaviour
 
     }
 
-    //private void FootSounds()
-    //{
-    //    footsteps.Play();
-    //}
+    private void FootSounds()
+    {
+        footsteps.Play();
+    }
 }
