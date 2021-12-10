@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,12 +28,14 @@ public class PinkPlayerController : MonoBehaviour
 
     [SerializeField] private AudioSource footsteps;
     [SerializeField] private AudioSource crystalSound;
+    [SerializeField] private AudioSource bumpSound;
 
     [SerializeField] private Vector3 respawnPoint;
     public GameObject fallDetector;
 
     public Text scoreText;
     public HealthBar healthBar; // access the public health script
+    
 
     void Start()
     {
@@ -149,7 +152,6 @@ public class PinkPlayerController : MonoBehaviour
 
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "FallDetector")
@@ -176,8 +178,7 @@ public class PinkPlayerController : MonoBehaviour
             ////// ABSTRACTION OF SCORE: ScoreController integer carried between scenes ////
             ScoreController.totalScore += 1;
             crystalSound.Play();
-            scoreText.text = "SCORE: " + ScoreController.totalScore;
-            Debug.Log(ScoreController.totalScore); 
+            scoreText.text = "SCORE: " + ScoreController.totalScore; 
             collision.gameObject.SetActive(false); // disable object
         }
         if (collision.tag == "Powerup")
@@ -187,6 +188,23 @@ public class PinkPlayerController : MonoBehaviour
             GetComponent<SpriteRenderer>().color = Color.green;
             StartCoroutine(PowerReset());
         }
+        if (collision.tag == "TRAPS/Saw")
+        {
+            healthBar.Damage(0.05f);
+            StartCoroutine(SawYourSkull());         
+        }
+
+    }
+
+    private IEnumerator SawYourSkull()
+    {
+        Debug.Log("SAW YOUR SKULL!");
+        state = State.HURT;
+        
+        player.velocity = new Vector2(hurtForce/2, player.velocity.y);
+        yield return new WaitForSeconds(1);
+        state = State.IDLE;
+
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -203,8 +221,11 @@ public class PinkPlayerController : MonoBehaviour
             else
             {
                 //TODO: consider coroutine to time the knockback animation
+                //TODO: consider pulling code out of player to a shared method
                 state = State.HURT;
                 HandleHealth();
+                // play impactSound
+                bumpSound.Play();
                 if (other.gameObject.transform.position.x > transform.position.x)
                 {
                     //enemy is to the right
@@ -217,7 +238,6 @@ public class PinkPlayerController : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void OnTriggerStay2D(Collider2D collision)

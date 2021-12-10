@@ -26,6 +26,7 @@ public class PlayerController2 : MonoBehaviour
     public Text scoreText;
     public HealthBar healthBar; // access the public health script
 
+
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
@@ -33,7 +34,7 @@ public class PlayerController2 : MonoBehaviour
         footsteps = GetComponent<AudioSource>();
         respawnPoint = transform.position; // stores players initial position to respawn to
         scoreText.text = "SCORE: " + ScoreController.totalScore;
-
+        Debug.Log("Start:" + SceneManager.GetActiveScene().name);
     }
 
     // Update is called once per frame
@@ -42,24 +43,49 @@ public class PlayerController2 : MonoBehaviour
         isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         direction = Input.GetAxis("Horizontal");
 
-        // for left/right movement
-        if (direction > 0f)
-        {
-            player.velocity = new Vector2(direction * speed, player.velocity.y);
-            transform.localScale = new Vector2(1, 1);
-        }
-        else if (direction < 0f)
-        {
-            // if player is on a tilted platform, player can slide when keys not pressed
-            // this keeps the player still when not pressing keys
-            player.velocity = new Vector2(direction * speed, player.velocity.y);
-            transform.localScale = new Vector2(-1, 1);
-        }
-        else
-        {
-            player.velocity = new Vector2(0, player.velocity.y);
-        }
 
+        // if main camera rotation.z = -180, switch left/right directions else normal
+        if (SceneManager.GetActiveScene().name == "Level 2")
+        {
+            Debug.Log("Success!");
+            
+            if (direction > 0f)
+            {
+                player.velocity = new Vector2(-direction * speed, player.velocity.y);
+                transform.localScale = new Vector2(-1, 1);
+            }
+            else if (direction < 0f)
+            {
+
+                player.velocity = new Vector2(-direction * speed, player.velocity.y);
+                transform.localScale = new Vector2(1, 1);
+            }
+            else
+            {
+                player.velocity = new Vector2(0, player.velocity.y);
+            }
+        }
+        else if (SceneManager.GetActiveScene().name != "Level 2")
+        {
+            // for left/right movement
+            if (direction > 0f)
+            {
+                player.velocity = new Vector2(direction * speed, player.velocity.y);
+                transform.localScale = new Vector2(1, 1);
+            }
+            else if (direction < 0f)
+            {
+                // if player is on a tilted platform, player can slide when keys not pressed
+                // this keeps the player still when not pressing keys
+                player.velocity = new Vector2(direction * speed, player.velocity.y);
+                transform.localScale = new Vector2(-1, 1);
+            }
+            else
+            {
+             player.velocity = new Vector2(0, player.velocity.y);
+            }
+        }
+        
         //for jump movement
         if(Input.GetButtonDown("Jump") && isTouchingGround)
         {

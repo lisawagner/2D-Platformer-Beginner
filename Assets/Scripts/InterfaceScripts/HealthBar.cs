@@ -31,18 +31,20 @@ public class HealthBar : MonoBehaviour
         {
             Health.totalHealth -= damage;
         }
-        else if (Health.totalHealth <= 0f)
+        else if (Health.totalHealth < 0.3f)
         {
-            //Health.totalHealth = 0f;
+            barImage.color = Color.red;
+        }
+
+        if (Health.totalHealth <= 0f)
+        {
+            Health.totalHealth = 0f;
             Debug.Log("Player Died");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             Health.totalHealth = 1f; //reset health
         }
 
-        if(Health.totalHealth < 0.3f)
-        {
-            barImage.color = Color.red;
-        }
+
 
         SetSize(Health.totalHealth);
 
