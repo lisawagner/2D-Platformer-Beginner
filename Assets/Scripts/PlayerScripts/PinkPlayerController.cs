@@ -28,7 +28,9 @@ public class PinkPlayerController : MonoBehaviour
 
     [SerializeField] private AudioSource footsteps;
     [SerializeField] private AudioSource crystalSound;
+    [SerializeField] private AudioSource powerupSound;
     [SerializeField] private AudioSource bumpSound;
+
 
     [SerializeField] private Vector3 respawnPoint;
     public GameObject fallDetector;
@@ -43,12 +45,8 @@ public class PinkPlayerController : MonoBehaviour
         playerAnimation = GetComponent<Animator>();
         playerHitBox = GetComponent<CapsuleCollider2D>(); //could just use generic Collider2D
                                                           //playerHitBox unused atm; using alternate ground check method
-        //footsteps = GetComponent<AudioSource>();
-        //crystalSound = GetComponent<AudioSource>();
-
         respawnPoint = transform.position; // stores players initial position to respawn to
         scoreText.text = "SCORE: " + ScoreController.totalScore;
-
     }
 
     // Update is called once per frame
@@ -183,10 +181,11 @@ public class PinkPlayerController : MonoBehaviour
         }
         if (collision.tag == "Powerup")
         {
-            Destroy(collision.gameObject);
             speed = speed + 10f;
+            powerupSound.Play();
             GetComponent<SpriteRenderer>().color = Color.green;
             StartCoroutine(PowerReset());
+            collision.gameObject.SetActive(false); // disable object
         }
         if (collision.tag == "TRAPS/Saw")
         {
@@ -198,13 +197,10 @@ public class PinkPlayerController : MonoBehaviour
 
     private IEnumerator SawYourSkull()
     {
-        Debug.Log("SAW YOUR SKULL!");
-        state = State.HURT;
-        
+        state = State.HURT;       
         player.velocity = new Vector2(hurtForce/2, player.velocity.y);
         yield return new WaitForSeconds(1);
         state = State.IDLE;
-
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -224,7 +220,6 @@ public class PinkPlayerController : MonoBehaviour
                 //TODO: consider pulling code out of player to a shared method
                 state = State.HURT;
                 HandleHealth();
-                // play impactSound
                 bumpSound.Play();
                 if (other.gameObject.transform.position.x > transform.position.x)
                 {
@@ -252,7 +247,6 @@ public class PinkPlayerController : MonoBehaviour
     private void HandleHealth()
     {
         healthBar.Damage(0.1f);
-
     }
 
     private void FootSounds()

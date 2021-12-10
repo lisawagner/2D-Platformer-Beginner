@@ -3937,7 +3937,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 00379ff33019bab4c9495c70aa3c3ff7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.45
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5531,6 +5531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impact: {fileID: 8300000, guid: 159652fe20de54484882d0914255f574, type: 3}
+  scoreText: {fileID: 8933305343219480832}
   flightSpeed: 2
   patrolRange: 30
   playerLayer:
@@ -13615,6 +13616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impact: {fileID: 0}
+  scoreText: {fileID: 0}
 --- !u!50 &1073402689
 Rigidbody2D:
   serializedVersion: 4
@@ -18966,6 +18968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impact: {fileID: 8300000, guid: d0f3539f53bb645619a7397f1fc9e2b4, type: 3}
+  scoreText: {fileID: 8933305343219480832}
   leftCap: 13
   rightCap: 20
   jumpLength: 1
@@ -30284,7 +30287,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8933305343198641105, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
       propertyPath: m_Text
-      value: 0
+      value: 'SCORE: 0'
       objectReference: {fileID: 0}
     - target: {fileID: 8933305343198641105, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
       propertyPath: m_FontData.m_FontSize
