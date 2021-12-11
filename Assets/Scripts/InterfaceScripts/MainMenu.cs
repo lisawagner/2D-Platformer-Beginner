@@ -11,7 +11,6 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         StartCoroutine(StartTransition());
-        //SceneManager.LoadScene(1);
     }
 
     IEnumerator StartTransition(bool fadeToBlack = true, float fadeSpeed = 0.4f)
@@ -26,13 +25,11 @@ public class MainMenu : MonoBehaviour
             fadeImage.color = objectColor;
             yield return null;
         }
-
         SceneManager.LoadScene(1);
     }
 
     public void Exit()
     {
-        Debug.Log("Quit");
         Application.Quit();
     }
 }
