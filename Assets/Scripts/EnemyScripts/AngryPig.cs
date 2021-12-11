@@ -19,7 +19,7 @@ public class AngryPig : EnemyController
 
     private bool isFacingLeft = true;
 
-    //TODO: Redo enemyAI to idle/walk/run depending on detecting player nearby
+    /// POLYMORPHISM AND INHERITANCE ///
     protected override void Start() /// child override
     {
         base.Start(); /// ACCESS parent start method

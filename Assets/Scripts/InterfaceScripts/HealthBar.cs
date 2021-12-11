@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
-
 public class HealthBar : MonoBehaviour
 {
     private RectTransform bar;
@@ -15,11 +13,11 @@ public class HealthBar : MonoBehaviour
     {
         bar = GetComponent<RectTransform>();
         barImage = GetComponent<Image>();
-        //if (Health.totalHealth < 0.3f)
-        //{
-        //    barImage.color = Color.red;
-        //}
-        //SetSize(Health.totalHealth);
+        if (Health.totalHealth < 0.3f)
+        {
+            barImage.color = Color.red;
+        }
+        SetSize(Health.totalHealth);
 
     }
 
@@ -44,10 +42,7 @@ public class HealthBar : MonoBehaviour
             Health.totalHealth = 1f; //reset health
         }
 
-
-
         SetSize(Health.totalHealth);
-
     }
 
     public void SetSize(float size)

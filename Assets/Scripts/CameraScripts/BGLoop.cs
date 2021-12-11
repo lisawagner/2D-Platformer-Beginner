@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Not used in current build 
 public class BGLoop : MonoBehaviour
 {
     public GameObject[] levels;

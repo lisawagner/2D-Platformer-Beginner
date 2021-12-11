@@ -5,17 +5,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
+/// ENCAPUSLATION via SerializeField ///
 public class PinkPlayerController : MonoBehaviour
 {
+    /// ABSTRACTION VIA FINITE STATE MACHINE ///
     private enum State { IDLE, RUN, JUMP, FALL, HURT };
     private State state = State.IDLE;
 
+    [Header("Movement")]
     [SerializeField] private float speed = 10f;
     [SerializeField] private float jumpSpeed = 18f;
     [SerializeField] private float hurtForce = 0.02f; //rebound/kickback from bumping enemy
     private float direction = 0f;
 
+    [Header("Ground Checks")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
@@ -24,21 +27,22 @@ public class PinkPlayerController : MonoBehaviour
     private Rigidbody2D player;
     private Animator playerAnimation;
     private CapsuleCollider2D playerHitBox; // for better re-use on different players, use Collider2D instead
-                                            // CapsuleCollider2D is a child of Collider2D, as is BoxCollider2D, etc. // Inheritance?
+                                            // CapsuleCollider2D is a child of Collider2D, as is BoxCollider2D, etc.
 
+    [Header("Audio Mess")]
     [SerializeField] private AudioSource footsteps;
     [SerializeField] private AudioSource crystalSound;
     [SerializeField] private AudioSource powerupSound;
     [SerializeField] private AudioSource bumpSound;
 
-
+    [Header("Player Spawn Point")]
     [SerializeField] private Vector3 respawnPoint;
-    public GameObject fallDetector;
 
+    [Header("Public Variables")]
+    public GameObject fallDetector;
     public Text scoreText;
     public HealthBar healthBar; // access the public health script
     
-
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
@@ -56,13 +60,12 @@ public class PinkPlayerController : MonoBehaviour
 
         if (state != State.HURT)
         {
-            MovementHandler(); // Abstraction Principle
+            MovementHandler(); /// ABSTRACTION PRINCIPLE
         }
         // --- ///
-        AnimationStateHandler(); // Abstraction Principle
+        AnimationStateHandler(); /// ABSTRACTION PRINCIPLE
         playerAnimation.SetInteger("State", (int)state);//updates animation based on Enumerator state
 
-        //TODO: Fix so that anims reset after fall caused by hurt knockback
         // fall detection - follow the player on the x axis
         fallDetector.transform.position = new Vector2(transform.position.x, fallDetector.transform.transform.position.y);
     }
@@ -188,15 +191,14 @@ public class PinkPlayerController : MonoBehaviour
             collision.gameObject.SetActive(false); // disable object
         }
         if (collision.tag == "TRAPS/Saw")
-        {
-            healthBar.Damage(0.05f);
+        {          
             StartCoroutine(SawYourSkull());         
         }
-
     }
 
     private IEnumerator SawYourSkull()
     {
+        healthBar.Damage(0.05f);
         state = State.HURT;       
         player.velocity = new Vector2(hurtForce/2, player.velocity.y);
         yield return new WaitForSeconds(1);
@@ -216,11 +218,9 @@ public class PinkPlayerController : MonoBehaviour
             }
             else
             {
-                //TODO: consider coroutine to time the knockback animation
-                //TODO: consider pulling code out of player to a shared method
                 state = State.HURT;
-                HandleHealth();
                 bumpSound.Play();
+                HandleHealth();
                 if (other.gameObject.transform.position.x > transform.position.x)
                 {
                     //enemy is to the right
@@ -230,10 +230,13 @@ public class PinkPlayerController : MonoBehaviour
                 {
                     //enemy is to the left
                     player.velocity = new Vector2(hurtForce, player.velocity.y);
-                }
+                }              
             }
         }
+        
+        
     }
+
 
     private void OnTriggerStay2D(Collider2D collision)
     {

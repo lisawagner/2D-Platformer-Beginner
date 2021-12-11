@@ -10,7 +10,7 @@ public class BirdMonster : EnemyController
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private bool isPlayerInRange;
 
-
+    /// POLYMORPHISM AND INHERITANCE ///
     protected override void Start() /// child override
     {
         base.Start(); /// ACCESS parent start method
@@ -25,8 +25,7 @@ public class BirdMonster : EnemyController
         {
             transform.position = Vector3.MoveTowards(transform.position,
                 thePlayer.transform.position, flightSpeed * Time.deltaTime);
-        }
-        
+        }     
     }
 
     private void OnDrawGizmosSelected()
