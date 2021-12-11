@@ -35,8 +35,9 @@ public class PinkPlayerController : MonoBehaviour
     [SerializeField] private AudioSource powerupSound;
     [SerializeField] private AudioSource bumpSound;
 
-    [Header("Player Spawn Point")]
+    [Header("Player Transitions")]
     [SerializeField] private Vector3 respawnPoint;
+    [SerializeField] private GameObject blackOutScreen;
 
     [Header("Public Variables")]
     public GameObject fallDetector;
@@ -166,14 +167,13 @@ public class PinkPlayerController : MonoBehaviour
         }
         if (collision.tag == "NextLevel")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            respawnPoint = transform.position; // reset spawn position
+            StartCoroutine(LevelTransition());
+            Invoke("NextLevel", 4.0f);
+            //stop player from moving
+            //rigidbody2D.contstraints.freezeposition.x.y.enabled
+            player.constraints = RigidbodyConstraints2D.FreezePosition;
         }
-        if (collision.tag == "PreviousLevel")
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-            respawnPoint = transform.position; // reset spawn position
-        }
+
         if (collision.tag == "Crystal")
         {
             ////// ABSTRACTION OF SCORE: ScoreController integer carried between scenes ////
@@ -194,6 +194,31 @@ public class PinkPlayerController : MonoBehaviour
         {          
             StartCoroutine(SawYourSkull());         
         }
+    }
+
+    IEnumerator LevelTransition(float fadeSpeed = 0.2f, int secondsToFadeSound = 5)
+    {
+        Color objectColor = blackOutScreen.GetComponent<Image>().color;
+        float fadeAmount;
+
+
+        while (blackOutScreen.GetComponent<Image>().color.a < 1)
+        {
+
+            fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
+            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+            blackOutScreen.GetComponent<Image>().color = objectColor;
+            yield return null;
+
+        }
+
+
+    }
+
+    void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        respawnPoint = transform.position; // reset spawn position
     }
 
     private IEnumerator SawYourSkull()
@@ -232,11 +257,8 @@ public class PinkPlayerController : MonoBehaviour
                     player.velocity = new Vector2(hurtForce, player.velocity.y);
                 }              
             }
-        }
-        
-        
+        }            
     }
-
 
     private void OnTriggerStay2D(Collider2D collision)
     {
