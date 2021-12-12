@@ -168,7 +168,7 @@ public class PinkPlayerController : MonoBehaviour
         if (collision.tag == "NextLevel")
         {
             StartCoroutine(LevelTransition());
-            Invoke("NextLevel", 4.0f);
+            Invoke("NextLevel", 2.0f);
             //stop player from moving
             player.constraints = RigidbodyConstraints2D.FreezePosition;
         }
@@ -195,20 +195,17 @@ public class PinkPlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator LevelTransition(float fadeSpeed = 0.2f, int secondsToFadeSound = 5)
+    IEnumerator LevelTransition(float fadeSpeed = 0.7f)
     {
         Color objectColor = blackOutScreen.GetComponent<Image>().color;
         float fadeAmount;
 
-
         while (blackOutScreen.GetComponent<Image>().color.a < 1)
         {
-
             fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
             objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
             blackOutScreen.GetComponent<Image>().color = objectColor;
             yield return null;
-
         }
 
 

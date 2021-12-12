@@ -172,6 +172,7 @@ MonoBehaviour:
   powerupSound: {fileID: 8092506671720503589}
   bumpSound: {fileID: 1801728051}
   respawnPoint: {x: 0, y: 0, z: 0}
+  blackOutScreen: {fileID: 0}
   fallDetector: {fileID: 0}
   scoreText: {fileID: 0}
   healthBar: {fileID: 0}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FadeInSound : MonoBehaviour
 {
-    public int secondsToFadeIn = 10;
+    public int secondsToFadeIn = 15;
     [SerializeField] private float MaxVol;
     void Start()
     {
@@ -17,15 +17,11 @@ public class FadeInSound : MonoBehaviour
         audioMusic.Play();
 
         while (audioMusic.volume < MaxVol)
-        {
-            
+        { 
             audioMusic.volume += Time.deltaTime / secondsToFadeIn;
             yield return null;
         }
 
     }
-    private void Update()
-    {
-        
-    }
+
 }
