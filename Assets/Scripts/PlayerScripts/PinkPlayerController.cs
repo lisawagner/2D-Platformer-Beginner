@@ -170,7 +170,6 @@ public class PinkPlayerController : MonoBehaviour
             StartCoroutine(LevelTransition());
             Invoke("NextLevel", 4.0f);
             //stop player from moving
-            //rigidbody2D.contstraints.freezeposition.x.y.enabled
             player.constraints = RigidbodyConstraints2D.FreezePosition;
         }
 
