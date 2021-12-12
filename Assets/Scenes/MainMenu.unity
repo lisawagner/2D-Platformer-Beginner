@@ -876,7 +876,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -281, y: -54}
+  m_AnchoredPosition: {x: -266, y: -25}
   m_SizeDelta: {x: 727.9768, y: 363.0546}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &954583085
@@ -917,7 +917,10 @@ MonoBehaviour:
     - keyboard control design
 
     - generic PC
-    controller also works'
+    controller also works
+
+
+    Collect pink crystals and jump on enemies to score!'
 --- !u!222 &954583086
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1320,7 +1323,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -603, y: -243}
+  m_AnchoredPosition: {x: -555, y: -231}
   m_SizeDelta: {x: 306.0223, y: 74.8314}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1783671063
