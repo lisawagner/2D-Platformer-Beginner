@@ -1783,7 +1783,7 @@ GameObject:
   - component: {fileID: 280420858}
   m_Layer: 6
   m_Name: Spike 1 (4)
-  m_TagString: Spikes
+  m_TagString: TRAPS/Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6072,7 +6072,7 @@ GameObject:
   - component: {fileID: 819013588}
   m_Layer: 6
   m_Name: Spike 1 (2)
-  m_TagString: Spikes
+  m_TagString: TRAPS/Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21254,7 +21254,7 @@ GameObject:
   - component: {fileID: 1567865520}
   m_Layer: 0
   m_Name: Spike 1
-  m_TagString: Spikes
+  m_TagString: TRAPS/Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23300,7 +23300,7 @@ GameObject:
   - component: {fileID: 1725707522}
   m_Layer: 6
   m_Name: Spike 1 (1)
-  m_TagString: Spikes
+  m_TagString: TRAPS/Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24879,7 +24879,7 @@ GameObject:
   - component: {fileID: 1785022303}
   m_Layer: 6
   m_Name: Spike 1 (5)
-  m_TagString: Spikes
+  m_TagString: TRAPS/Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28414,7 +28414,7 @@ GameObject:
   - component: {fileID: 2053540755}
   m_Layer: 6
   m_Name: Spike 1 (3)
-  m_TagString: Spikes
+  m_TagString: TRAPS/Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

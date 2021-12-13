@@ -268,11 +268,13 @@ public class PinkPlayerController : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         //TODO: Fix - It doesn't run continuously while player stays on spikes
-        if (collision.tag == "Spikes")
+        if (collision.tag == "TRAPS/Spikes")
         {
             healthBar.Damage(0.002f);
         }
+
     }
+
 
     private void HandleHealth()
     {

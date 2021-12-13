@@ -12,9 +12,9 @@ TagManager:
   - NextLevel
   - PreviousLevel
   - Crystal
-  - Spikes
   - TRAPS/Saw
   - TRAPS/Spikes
+  - Platform
   layers:
   - Default
   - TransparentFX
