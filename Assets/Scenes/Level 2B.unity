@@ -7788,9 +7788,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 00379ff33019bab4c9495c70aa3c3ff7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 42eca95eca33c464b93c6797d20a673c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7886,8 +7886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6ddd910ef15fc4688f512c6633f5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondsToFadeIn: 20
-  MaxVol: 0.35
+  secondsToFadeIn: 5
+  MaxVol: 0.5
 --- !u!1 &553649554
 GameObject:
   m_ObjectHideFlags: 0
@@ -50265,22 +50265,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 44575084}
     m_Modifications:
-    - target: {fileID: 1060925247, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8933305343198641105, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
-      propertyPath: m_Color.b
-      value: 0.37967896
-      objectReference: {fileID: 0}
-    - target: {fileID: 8933305343198641105, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
-      propertyPath: m_Color.g
-      value: 0.048593827
-      objectReference: {fileID: 0}
-    - target: {fileID: 8933305343198641105, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
-      propertyPath: m_Color.r
-      value: 0.7924528
-      objectReference: {fileID: 0}
+    - target: {fileID: 154005942989277187, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 1801728042}
+    - target: {fileID: 154005942989277187, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
+      propertyPath: mainMusic
+      value: 
+      objectReference: {fileID: 519420035}
     - target: {fileID: 8933305344721629593, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
       propertyPath: m_Pivot.x
       value: 0

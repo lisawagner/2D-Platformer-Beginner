@@ -25661,10 +25661,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 44575084}
     m_Modifications:
-    - target: {fileID: 1060925247, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 154005942989277187, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 1801728042}
+    - target: {fileID: 154005942989277187, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
+      propertyPath: mainMusic
+      value: 
+      objectReference: {fileID: 519420035}
     - target: {fileID: 8933305344721629593, guid: e5c018012d9b2b94bb52375b097af53f, type: 3}
       propertyPath: m_Pivot.x
       value: 0

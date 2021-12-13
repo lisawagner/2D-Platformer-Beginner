@@ -34,6 +34,7 @@ public class PinkPlayerController : MonoBehaviour
     [SerializeField] private AudioSource crystalSound;
     [SerializeField] private AudioSource powerupSound;
     [SerializeField] private AudioSource bumpSound;
+    [SerializeField] private AudioSource mainMusic;
 
     [Header("Player Transitions")]
     [SerializeField] private Vector3 respawnPoint;
@@ -195,10 +196,20 @@ public class PinkPlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator LevelTransition(float fadeSpeed = 0.7f)
+    IEnumerator LevelTransition(float fadeSpeed = 0.7f, int secondsToFadeOut = 3)
     {
         Color objectColor = blackOutScreen.GetComponent<Image>().color;
         float fadeAmount;
+
+        mainMusic = Camera.main.GetComponent<AudioSource>();
+        while (mainMusic.volume > 0.01f)
+        {
+            mainMusic.volume -= Time.deltaTime / secondsToFadeOut;
+            yield return null;
+        }
+
+        mainMusic.volume = 0;
+        mainMusic.Stop();
 
         while (blackOutScreen.GetComponent<Image>().color.a < 1)
         {
@@ -207,8 +218,6 @@ public class PinkPlayerController : MonoBehaviour
             blackOutScreen.GetComponent<Image>().color = objectColor;
             yield return null;
         }
-
-
     }
 
     void NextLevel()

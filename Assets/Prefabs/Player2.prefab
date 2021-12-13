@@ -171,6 +171,7 @@ MonoBehaviour:
   crystalSound: {fileID: 4408316192528333065}
   powerupSound: {fileID: 8092506671720503589}
   bumpSound: {fileID: 1801728051}
+  mainMusic: {fileID: 0}
   respawnPoint: {x: 0, y: 0, z: 0}
   blackOutScreen: {fileID: 0}
   fallDetector: {fileID: 0}
